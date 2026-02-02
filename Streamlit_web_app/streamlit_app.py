@@ -6,38 +6,6 @@ Created on Sat Jan 31 20:01:44 2026
 """
 
 import streamlit as st
-from PIL import Image
-import io
-import base64
-
-st.write("📁 Working directory:", os.getcwd())
-st.write("📂 Files in cwd:", os.listdir())
-
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-st.write("📁 BASE_DIR:", BASE_DIR)
-
-st.write("📂 Files in BASE_DIR:", os.listdir(BASE_DIR))
-def circular_image_from_path(image_path, size=200):
-    image = Image.open(image_path).convert("RGB")
-    image = image.resize((size, size))
-
-    buffered = io.BytesIO()
-    image.save(buffered, format="PNG")
-    img_str = base64.b64encode(buffered.getvalue()).decode()
-
-    return f"""
-    <div style="
-        width:{size}px;
-        height:{size}px;
-        border-radius:50%;
-        overflow:hidden;
-        border:4px solid #FFD700;
-        margin:auto;
-    ">
-        <img src="data:image/png;base64,{img_str}"
-             style="width:100%; height:100%; object-fit:cover;">
-    </div>
-    """
 
 st.set_page_config(
     page_title="My Portfolio",
@@ -45,14 +13,9 @@ st.set_page_config(
     layout="wide"
 )
 
-col1, col2 = st.columns([1, 2])
+col2 = st.columns([1])
 
-with col1:
-    image_path = "asset/profile.jpeg"  # 👈 YOUR IMAGE PATH
-    st.markdown(
-        circular_image_from_path(image_path),
-        unsafe_allow_html=True
-    )
+
 with col2:
     st.markdown("""
     ### Kwizera Mpilonhle Rwarinda
@@ -123,5 +86,6 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+
 
 
