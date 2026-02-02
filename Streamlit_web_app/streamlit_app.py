@@ -10,6 +10,13 @@ from PIL import Image
 import io
 import base64
 
+st.write("📁 Working directory:", os.getcwd())
+st.write("📂 Files in cwd:", os.listdir())
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+st.write("📁 BASE_DIR:", BASE_DIR)
+
+st.write("📂 Files in BASE_DIR:", os.listdir(BASE_DIR))
 def circular_image_from_path(image_path, size=200):
     image = Image.open(image_path).convert("RGB")
     image = image.resize((size, size))
@@ -116,4 +123,5 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+
 
